@@ -6,11 +6,17 @@ if [ "$(whoami)" != "root" ]; then
 fi
 
 #Setup the motd
-apt-get -yqq install figlet		# for block text
+apt-get -yqq install figlet	# for block text
 echo "" > /etc/motd		# clear the disclaimer
 cp files/motd /etc/init.d/motd	# motd script with figlet command
 service motd stop		# enable the change
 service motd start
-echo "| MOTD configured |"
+echo "|  MOTD configured   |"
 
-echo "| System is ready |"
+#Setup the network
+echo -n "IP Address for this pi: "
+read ip
+sed s/"ip_addr"/"$ip"/ <files/interfaces >/etc/network/interfaces
+echo "| Network configured |"
+
+echo "|  System is ready   |"
