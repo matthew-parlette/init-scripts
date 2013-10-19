@@ -59,7 +59,7 @@ if [[ "$response" =~ ^(yes|y|)$ ]]; then
   echo "|   n2n configured   |"
 fi
 
-echo "|  System is ready   |"
+echo "| Configuration done |"
 if [ $reboot -eq 1 ]; then
   echo "| Reboot before use  |"
 fi
