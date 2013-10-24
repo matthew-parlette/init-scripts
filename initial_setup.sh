@@ -25,6 +25,7 @@ if [[ "$response" =~ ^(yes|y|)$ ]]; then
   echo -n "Local IP Address for this pi: "
   read ip
   sed s/"ip_addr"/"$ip"/ <files/interfaces >/etc/network/interfaces
+  cp files/resolv.conf /etc/resolv.conf
   echo "| Network configured |"
 fi
 
