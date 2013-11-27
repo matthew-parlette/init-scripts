@@ -43,9 +43,11 @@ if [[ "$response" =~ ^(yes|y|)$ ]]; then
   fi
 
   echo "Starting puppet agent..."
-  sed -i 's/START=no/START=yes/g' /etc/default/puppet
+  if [ -a "/etc/default/puppet" ]; then
+    sed -i 's/START=no/START=yes/g' /etc/default/puppet
+  fi
   #sed -i s/'^DAEMON_OPTS=.*$'/"DAEMON_OPTS=\"--certname $hostname\""/g /etc/default/puppet
-  #puppet agent --enable
+  puppet agent --enable
 
 fi
 
