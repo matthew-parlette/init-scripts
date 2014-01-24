@@ -17,8 +17,8 @@ echo "*Hostname set to $hostname*"
 echo "Installing puppet..."
 apt-get install -qq puppet
 if [ ! "$?" ]; then
-echo -n "Puppet failed to install, exiting..."
-exit 1
+  echo -n "Puppet failed to install, exiting..."
+  exit 1
 fi
 
 echo "Verifying connectivity to puppet master ($puppetmaster)..."
