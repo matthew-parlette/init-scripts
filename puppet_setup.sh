@@ -16,7 +16,7 @@ echo "*Hostname set to $hostname*"
 #Make sure puppetmaster address is in hosts file
 hosts_entry=`cat /etc/hosts | grep $puppetmaster`
 if [ -z "$hosts_entry" ]; then
-  echo "10.1.2.201\tpuppet-master.andromeda" >> /etc/hosts
+  echo -e "10.1.2.201\tpuppet-master.andromeda" >> /etc/hosts
 fi
 
 #Install puppet
