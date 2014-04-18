@@ -89,7 +89,7 @@ sudo sed -i s/"supernode_addr"/"$supernode_addr"/g /etc/init/n2n.conf
 # Start n2n
 echo "Starting n2n..."
 echo "(You may need to enter your sudo password)"
-sudo initctl reload
+sudo initctl reload-configuration
 sudo start n2n
 if [ ! "$?" ]; then
     echo "Error starting n2n..."
