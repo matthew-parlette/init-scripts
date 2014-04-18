@@ -64,7 +64,7 @@ echo "Checking on n2n status..."
 echo "(You may need to enter your sudo password)"
 sudo status n2n
 n2n_status="$?"
-if [ ! "$n2n_status" ]; then
+if [ "$n2n_status" ]; then
     if yes_no_question "n2n does not appear to be running, would you like to configure it now?"
     then
         eval "$script_dir/n2n_bootstrap.sh"
@@ -78,25 +78,28 @@ if [ ! "$n2n_status" ]; then
     fi
 fi
 
-if [ ! "$n2n_status" ]; then
+if [ "$n2n_status" ]; then
     # n2n Stopped
     echo "n2n does not appear to be running, exiting..."
     exit 1
 else
     # n2n Running
     echo "n2n apears to be running!"
-    
-    echo "Checking on salt dns entry..."
-    if grep -q "salt" "/etc/hosts"
+    if yes_no_question "Continue with salt bootstrap?"
     then
-        echo "Salt server dns is setup!"
-    else
-        echo "Adding salt dns entry to hosts..."
-        echo "(You may need to enter your sudo password)"
-        echo -e "10.1.2.5\tsalt" | sudo tee -a /etc/hosts > /dev/null
-    fi
+        echo "Checking on salt dns entry..."
+        if grep -q "salt" "/etc/hosts"
+        then
+            echo "Salt server dns is setup!"
+        else
+            echo "Adding salt dns entry to hosts..."
+            echo "(You may need to enter your sudo password)"
+            echo -e "10.1.2.5\tsalt" | sudo tee -a /etc/hosts > /dev/null
+        fi
 
-    echo "Installing salt minion..."
-    echo "(You may need to enter your sudo password)"
-    eval "wget -O - http://bootstrap.saltstack.org | sudo sh"
+        echo "Installing salt minion..."
+        echo "(You may need to enter your sudo password)"
+        eval "wget -O - http://bootstrap.saltstack.org | sudo sh"
+    else
+        echo "Exiting..."
 fi
