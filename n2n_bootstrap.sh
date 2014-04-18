@@ -73,18 +73,18 @@ echo -n "n2n Supernode Address: "
 read supernode_addr
 
 # Install n2n
-apt-get install -qq n2n
+sudo apt-get install -qq n2n
 if [ ! "$?" ]; then
     echo -n "n2n failed to install, exiting..."
     exit 1
 fi
 
 # Install n2n init script
-cp files/n2n.conf /etc/init/
-sed -i s/"ip_addr"/"$n2n_ip"/g /etc/init/n2n.conf
-sed -i s/"n2n_community"/"$n2n_community"/g /etc/init/n2n.conf
-sed -i s/"community_password"/"$community_password"/g /etc/init/n2n.conf
-sed -i s/"supernode_addr"/"$supernode_addr"/g /etc/init/n2n.conf
+sudo cp files/n2n.conf /etc/init/
+sudo sed -i s/"ip_addr"/"$n2n_ip"/g /etc/init/n2n.conf
+sudo sed -i s/"n2n_community"/"$n2n_community"/g /etc/init/n2n.conf
+sudo sed -i s/"community_password"/"$community_password"/g /etc/init/n2n.conf
+sudo sed -i s/"supernode_addr"/"$supernode_addr"/g /etc/init/n2n.conf
 
 # Start n2n
 echo "Starting n2n..."
