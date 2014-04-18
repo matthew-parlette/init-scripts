@@ -64,7 +64,7 @@ echo "Checking on n2n status..."
 echo "(You may need to enter your sudo password)"
 sudo status n2n
 n2n_status="$?"
-if [ "$n2n_status" ]; then
+if [ "$n2n_status" != 0 ]; then
     if yes_no_question "n2n does not appear to be running, would you like to configure it now?"
     then
         eval "$script_dir/n2n_bootstrap.sh"
@@ -78,7 +78,7 @@ if [ "$n2n_status" ]; then
     fi
 fi
 
-if [ "$n2n_status" ]; then
+if [ "$n2n_status" != 0 ]; then
     # n2n Stopped
     echo "n2n does not appear to be running, exiting..."
     exit 1
