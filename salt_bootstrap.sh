@@ -100,6 +100,9 @@ else
         echo "Installing salt minion..."
         echo "(You may need to enter your sudo password)"
         eval "wget -O - http://bootstrap.saltstack.org | sudo sh"
+        exit 0
     else
         echo "Exiting..."
+        exit 1
+    fi
 fi
